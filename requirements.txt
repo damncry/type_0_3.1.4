@@ -1,0 +1,7 @@
+psutil>=5.9.8
+pywebview>=5.4
+pystray>=0.19.5
+Pillow>=10.4
+PyInstaller>=6.11
+pythonnet>=3.0.5; platform_system == "Windows"
+clr_loader>=0.2.7; platform_system == "Windows"

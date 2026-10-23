@@ -1,0 +1,144 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: Consolas, 'Cascadia Mono', ui-monospace, monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--foreground);
+  --color-elevated: var(--elevated);
+  --color-popover: var(--elevated);
+  --color-popover-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--foreground);
+  --color-muted: var(--secondary);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--secondary);
+  --color-accent-foreground: var(--foreground);
+  --color-destructive: var(--destructive);
+  --color-warning: var(--warning);
+  --color-cpu: var(--cpu);
+  --color-track: var(--track);
+  --color-border: var(--border);
+  --color-input: var(--border);
+  --color-ring: var(--primary);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+}
+
+:root {
+  color-scheme: dark;
+  --background: #0a0c0b;
+  --card: #111413;
+  --elevated: #171b19;
+  --secondary: #1a1f1c;
+  --foreground: #e7ece8;
+  --muted-foreground: #8a948e;
+  --primary: #86d6a4;
+  --primary-foreground: #06130b;
+  --cpu: #8fb3ff;
+  --warning: #e6b872;
+  --destructive: #f07a7a;
+  --track: rgb(255 255 255 / 0.06);
+  --border: rgb(255 255 255 / 0.07);
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/60;
+  }
+  html,
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+  ::selection {
+    background: rgb(134 214 164 / 0.25);
+  }
+}
+
+/* Slim scrollbars to match the desktop app chrome */
+.t0-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255 255 255 / 0.1) transparent;
+}
+
+/* Range input with a filled track driven by --fill */
+.t0-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 20px;
+  background: transparent;
+  cursor: pointer;
+}
+.t0-range::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--primary) var(--fill), var(--track) var(--fill));
+}
+.t0-range::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--primary) var(--fill), var(--track) var(--fill));
+}
+.t0-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  margin-top: -6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: var(--foreground);
+  box-shadow: 0 0 0 4px rgb(134 214 164 / 0);
+  transition: box-shadow 160ms ease, transform 160ms ease;
+}
+.t0-range::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--foreground);
+}
+.t0-range:hover::-webkit-slider-thumb,
+.t0-range:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 5px rgb(134 214 164 / 0.18);
+}
+.t0-range:active::-webkit-slider-thumb {
+  transform: scale(1.1);
+}
+.t0-range:focus-visible {
+  outline: none;
+}
+
+
+/* Keep native window dragging responsive: pause decorative CSS effects and expensive blur while moving. */
+html.type0-window-moving *,
+html.type0-window-moving *::before,
+html.type0-window-moving *::after {
+  transition-duration: 0ms !important;
+  animation-play-state: paused !important;
+  scroll-behavior: auto !important;
+}
+html.type0-window-moving .backdrop-blur-md,
+html.type0-window-moving .backdrop-blur-sm,
+html.type0-window-moving .backdrop-blur-xl {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+html.type0-window-moving {
+  cursor: default;
+}
